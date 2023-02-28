@@ -3,6 +3,21 @@ document.getElementById("date").valueAsDate = new Date();
 document.getElementById("auteur").focus();
 $("#bouton").click(ajouterSavoir);
 
+setInterval(() => {
+  $.ajax({
+    url: "https://api.chucknorris.io/jokes/random",
+    method: "GET",
+  }).done((donnees) => $("#chucknorris").text(donnees.value));
+
+  let hasard = Math.floor(Math.random() * 1000) + 1;
+  $.ajax({
+    url: "https://pokeapi.co/api/v2/pokemon/" + hasard,
+    method: "GET",
+  }).done((donnees) =>
+    $("#pokemon").attr("src", donnees.sprites.front_default)
+  );
+}, 5000);
+
 // document.getElementById('bouton').addEventListener(
 //     'click',
 //     () => {
